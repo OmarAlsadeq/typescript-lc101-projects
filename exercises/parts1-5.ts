@@ -1,24 +1,18 @@
 // URL for the instructions: 
 // https://education.launchcode.org/intro-to-professional-web-dev/chapters/typescript/exercises.html 
-
+import { SpaceLocation } from './SpaceLocation';
 
 // Part 1: Declare (5) Variables With Type
-let spacecraftName: string = 'Determination';
-let speedMPH: number = 17500;
 let kilometersToMars: number = 225000000;
 let kilometersToTheMoon: number = 384400;
-let milesPerKilometer: number = 0.621;
 
 
 // Part 2: Print Days to Mars
-let milesToMars: number = kilometersToMars * milesPerKilometer;
-let hoursToMars: number = milesToMars / speedMPH;
-let daysToMars: number = hoursToMars / 24;
 
 
 
 // Code an output statement here (use a template literal):
-console.log(`${spacecraftName} takes ${daysToMars} days to get to Mars.`);
+
 
 
 // Part 3: Create a Function ("getDaysToLocation")
@@ -30,18 +24,37 @@ console.log(`${spacecraftName} takes ${daysToMars} days to get to Mars.`);
 
 
 
-
 // Part 4: Create a Spacecraft Class
+class SpaceCraft{
+    milesPerKilometer: number = 0.621;
+    name: string;
+    speedMph: number;
 
+    constructor(name:string, speedMPH: number){
+        this.name = name;
+        this.speedMph = 17500;
+    }
+    getDaysToLocation(kilometersAway: number): number {
+        let milesAway: number = kilometersAway * this.milesPerKilometer;
+        let hour: number =  milesAway / this.speedMph;
+        return hour / 24
+       }
+       printDaysToLocation(location: SpaceLocation) {
+        console.log(`${this.name} would take ${this.getDaysToLocation(location.kilometersAway)} days to get to ${location.name}.`);
+     }
+}
 
 
 
 // Create an instance of the class here:
-
+let spaceShuttle = new SpaceCraft('Determination', 17500);
+console.log(spaceShuttle);
 
 
 // Move your output statements from part 3 here. Update the template literals use the
 // instance of the class.
+spaceShuttle.printDaysToLocation(new SpaceLocation('Mars', kilometersToMars));
+spaceShuttle.printDaysToLocation(new SpaceLocation('the Moon', kilometersToTheMoon));
 
 
 
